@@ -163,3 +163,13 @@ servicePills.forEach((pill) => {
     }
   });
 });
+
+// Ensure background video loop works reliably across all browsers (specifically WebKit/Safari)
+const heroVideo = document.querySelector('.hero-video');
+if (heroVideo) {
+  heroVideo.addEventListener('ended', function() {
+    this.currentTime = 0;
+    this.play().catch((err) => console.log('Video loop play failed:', err));
+  });
+}
+
